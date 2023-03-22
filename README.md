@@ -33,10 +33,10 @@ As with any software project, there may be limitations or issues with this langu
 #### 9. How can I get help with using this language?
 Help with using this language can be found in the project's documentation and on the GitHub issue tracker.
 
-Syntax
+## Syntax
 Zero Language has a syntax similar to C# with some additional constructs. Here are some examples of the syntax:
 
-Defining a function:
+## Defining a function:
 ```bash
 Function MyFunction()
 {
@@ -45,21 +45,21 @@ Function MyFunction()
 EndFunction
 ```
 
-Creating a file:
+### Creating a file:
 ```bash
 File.Create("filename", "path", "file content");
 ```
 
-Displaying a message box:
+### Displaying a message box:
 ```bash
 Messagebox("message");
 ```
 
-Hiding the console:
+### Hiding the console:
 ```bash
 HideConsole();
 ```
-Waiting for user input:
+### Waiting for user input:
 ```bash
 ConsoleWait(key/line);
 ```
@@ -67,14 +67,14 @@ ConsoleWait(key/line);
 
 ## Examples
 
-Here is an example of a program written in Zero Script that prints the numbers 1 to 10:
+### Here is an example of a program written in Zero Script that prints the numbers 1 to 10:
 ```bash
 For (int i = 1; i <= 10; i++)
 {
   Log(i);
 }
 ```
-Here is an example of a program written in Zero Language that calculates the factorial of a number:
+### Here is an example of a program written in Zero Language that calculates the factorial of a number:
 ```bash
 Function Factorial(int n)
 {
