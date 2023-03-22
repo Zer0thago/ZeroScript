@@ -92,8 +92,18 @@ namespace _0Code
                 }
                 else if (line.StartsWith("For", StringComparison.OrdinalIgnoreCase) || line.StartsWith("for", StringComparison.OrdinalIgnoreCase))
                 {
+                    string[] forParts = line.Split(new[] { ';', '(' }, StringSplitOptions.RemoveEmptyEntries);
+                    string initialization = forParts[1].Trim();
+                    string condition = forParts[2].Trim();
+                    string iterator = forParts[3].Trim();
+
+                    actions.Add(new Action { Code = $"for ({initialization}; {condition}; {iterator}) {{" });
+
                     AddClosingBraceIfNeeded(actions);
-                    actions.Add(new Action { Code = $"for ({line.Substring(3)}) {{" });
+                }
+                else if (line.StartsWith("EndFor", StringComparison.OrdinalIgnoreCase) || line.Equals("endfor", StringComparison.OrdinalIgnoreCase))
+                {
+                    actions.Add(new Action { Code = "}" });
                 }
                 else if (parts[0].Equals("File.Create", StringComparison.OrdinalIgnoreCase))
                     {
@@ -102,7 +112,7 @@ namespace _0Code
                     string fileContent = parts[3];
                     CreateFile(Path.Combine(Path.GetDirectoryName(filePath), fileName), fileContent);
                 }
-
+                
 
                 lineNumber++;
             }
@@ -176,19 +186,6 @@ using System.Runtime.InteropServices;
             {{
                 public class MyClass
                 {{
-[DllImport(""kernel32.dll"")]
-        static extern IntPtr GetConsoleWindow();
-
-        [DllImport(""user32.dll"")]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        const int SW_HIDE = 0;
-
-        public static void HideConsole()
-        {{
-            var handle = GetConsoleWindow();
-            ShowWindow(handle, SW_HIDE);
-        }}
                     public static void Main()
                     {{
                         {consoleLine}
@@ -197,33 +194,7 @@ using System.Runtime.InteropServices;
             }}";
             File.WriteAllText("log.cs", code.ToString());
 
-            CodeDomProvider provider = new CSharpCodeProvider();
-            CompilerParameters parameters = new CompilerParameters();
-            parameters.GenerateExecutable = true;
-            parameters.OutputAssembly = "Project.exe";
-            parameters.ReferencedAssemblies.Add("System.dll");
-            parameters.ReferencedAssemblies.Add("System.Windows.Forms.dll");
-            parameters.ReferencedAssemblies.Add("mscorlib.dll");
-            parameters.ReferencedAssemblies.Add("System.Runtime.InteropServices.dll");
-
-            CompilerResults results = provider.CompileAssemblyFromSource(parameters, code);
-
-
-            if (results.Errors.HasErrors)
-            {
-                Console.WriteLine("Compilation failed:");
-                foreach (CompilerError error in results.Errors)
-                {
-                    Console.WriteLine(error.ErrorText);
-
-
-                }
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Compilation successful!");
-            }
+            
 
 
 

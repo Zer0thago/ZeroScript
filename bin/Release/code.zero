@@ -1,7 +1,9 @@
-int x = 2;
+Function Factorial()
 
-if x == x
- Messagebox("hello")
-else
- Messagebox("hello2")	 
-endif
+For int i = 1; i <= 10; i++
+  Log(i);
+EndFor
+
+EndFunction
+
+Factorial();

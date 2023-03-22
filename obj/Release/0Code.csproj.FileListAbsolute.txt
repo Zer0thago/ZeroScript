@@ -6,3 +6,11 @@ C:\Users\stefa\Desktop\Project\c#\0Code\obj\Release\0Code.csproj.SuggestedBindin
 C:\Users\stefa\Desktop\Project\c#\0Code\obj\Release\0Code.csproj.CoreCompileInputs.cache
 C:\Users\stefa\Desktop\Project\c#\0Code\obj\Release\0Code.exe
 C:\Users\stefa\Desktop\Project\c#\0Code\obj\Release\0Code.pdb
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\bin\Release\0Code.exe.config
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\bin\Release\0Code.exe
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\bin\Release\0Code.pdb
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\obj\Release\0Code.csproj.AssemblyReference.cache
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\obj\Release\0Code.csproj.SuggestedBindingRedirects.cache
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\obj\Release\0Code.csproj.CoreCompileInputs.cache
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\obj\Release\0Code.exe
+C:\Users\stefa\Desktop\Project\c#\0Code\ZeroScript\obj\Release\0Code.pdb
