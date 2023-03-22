@@ -5,13 +5,34 @@ Zero Language is a simple programming language designed for beginners to learn p
 
 ## FAQ
 
-#### Question 1
+#### What is the purpose of this programming language?
 
-Answer 1
+Answer The purpose of this language is to provide a simple and easy-to-learn syntax for beginners who are new to programming.
 
-#### Question 2
+#### What platforms does this language support?
+Answer This language is designed to run on the Microsoft .NET framework and can be used on Windows, macOS, and Linux.
 
-Answer 2
+#### What are some key features of this language?
+Some key features of this language include support for functions, if-else statements, loops, file I/O operations, and console input/output.
+
+#### Is this language object-oriented?
+No, this language does not support object-oriented programming concepts such as classes, objects, and inheritance.
+
+#### How do I run programs written in this language?
+To run programs written in this language, you need to compile the code using a C# compiler, such as the one provided by Microsoft's .NET framework.
+
+#### Is there a community for this language?
+As this language is a personal project, there is currently no established community for it. However, contributions and feedback are always welcome.
+
+#### How can I contribute to this project?
+While this language is not currently optimized for performance or scalability, it can be used in small-scale production environments for simple scripts and applications.
+
+#### Are there any known limitations or issues with this language?
+As with any software project, there may be limitations or issues with this language. Please refer to the project's issue tracker on GitHub for a list of known issues.
+
+#### How can I get help with using this language?
+Help with using this language can be found in the project's documentation and on the GitHub issue tracker.
+
 Syntax
 Zero Language has a syntax similar to C# with some additional constructs. Here are some examples of the syntax:
 
