@@ -1,0 +1,16 @@
+C:\Users\stefa\Desktop\c#\0Code\bin\Debug\0Code.exe.config
+C:\Users\stefa\Desktop\c#\0Code\bin\Debug\0Code.exe
+C:\Users\stefa\Desktop\c#\0Code\bin\Debug\0Code.pdb
+C:\Users\stefa\Desktop\c#\0Code\obj\Debug\0Code.csproj.AssemblyReference.cache
+C:\Users\stefa\Desktop\c#\0Code\obj\Debug\0Code.csproj.SuggestedBindingRedirects.cache
+C:\Users\stefa\Desktop\c#\0Code\obj\Debug\0Code.csproj.CoreCompileInputs.cache
+C:\Users\stefa\Desktop\c#\0Code\obj\Debug\0Code.exe
+C:\Users\stefa\Desktop\c#\0Code\obj\Debug\0Code.pdb
+C:\Users\stefa\Desktop\Project\c#\0Code\bin\Debug\0Code.exe.config
+C:\Users\stefa\Desktop\Project\c#\0Code\bin\Debug\0Code.exe
+C:\Users\stefa\Desktop\Project\c#\0Code\bin\Debug\0Code.pdb
+C:\Users\stefa\Desktop\Project\c#\0Code\obj\Debug\0Code.csproj.AssemblyReference.cache
+C:\Users\stefa\Desktop\Project\c#\0Code\obj\Debug\0Code.csproj.SuggestedBindingRedirects.cache
+C:\Users\stefa\Desktop\Project\c#\0Code\obj\Debug\0Code.csproj.CoreCompileInputs.cache
+C:\Users\stefa\Desktop\Project\c#\0Code\obj\Debug\0Code.exe
+C:\Users\stefa\Desktop\Project\c#\0Code\obj\Debug\0Code.pdb

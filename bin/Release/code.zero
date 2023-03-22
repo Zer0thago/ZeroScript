@@ -1,0 +1,7 @@
+int x = 2;
+
+if x == x
+ Messagebox("hello")
+else
+ Messagebox("hello2")	 
+endif
