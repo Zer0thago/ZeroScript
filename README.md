@@ -39,9 +39,9 @@ Zero Language has a syntax similar to C# with some additional constructs. Here a
 ## Defining a function:
 ```bash
 Function MyFunction()
-{
+
   // code to be executed
-}
+
 EndFunction
 ```
 
