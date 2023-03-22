@@ -5,32 +5,32 @@ Zero Language is a simple programming language designed for beginners to learn p
 
 ## FAQ
 
-#### What is the purpose of this programming language?
+#### 1. What is the purpose of this programming language?
 
 Answer The purpose of this language is to provide a simple and easy-to-learn syntax for beginners who are new to programming.
 
-#### What platforms does this language support?
+#### 2. What platforms does this language support?
 Answer This language is designed to run on the Microsoft .NET framework and can be used on Windows, macOS, and Linux.
 
-#### What are some key features of this language?
+#### 3. What are some key features of this language?
 Some key features of this language include support for functions, if-else statements, loops, file I/O operations, and console input/output.
 
-#### Is this language object-oriented?
+#### 4. Is this language object-oriented?
 No, this language does not support object-oriented programming concepts such as classes, objects, and inheritance.
 
-#### How do I run programs written in this language?
+#### 5. How do I run programs written in this language?
 To run programs written in this language, you need to compile the code using a C# compiler, such as the one provided by Microsoft's .NET framework.
 
-#### Is there a community for this language?
+#### 6. Is there a community for this language?
 As this language is a personal project, there is currently no established community for it. However, contributions and feedback are always welcome.
 
-#### How can I contribute to this project?
+#### 7. How can I contribute to this project?
 While this language is not currently optimized for performance or scalability, it can be used in small-scale production environments for simple scripts and applications.
 
-#### Are there any known limitations or issues with this language?
+#### 8. Are there any known limitations or issues with this language?
 As with any software project, there may be limitations or issues with this language. Please refer to the project's issue tracker on GitHub for a list of known issues.
 
-#### How can I get help with using this language?
+#### 9. How can I get help with using this language?
 Help with using this language can be found in the project's documentation and on the GitHub issue tracker.
 
 Syntax
