@@ -69,22 +69,22 @@ ConsoleWait(key/line);
 
 ### Here is an example of a program written in Zero Script that prints the numbers 1 to 10:
 ```bash
-For (int i = 1; i <= 10; i++)
-{
+For int i = 1; i <= 10; i++
+
   Log(i);
-}
+Endfor
 ```
 ### Here is an example of a program written in Zero Language that calculates the factorial of a number:
 ```bash
 Function Factorial(int n)
-{
+
   int result = 1;
   For (int i = 1; i <= n; i++)
   {
     result = result * i;
   }
   Log(result);
-}
+
 EndFunction
 
 Factorial(5);
