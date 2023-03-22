@@ -2,12 +2,20 @@
 
 Zero Language is a simple programming language designed for beginners to learn programming concepts. The language is inspired by a subset of C# and provides basic constructs such as loops, conditional statements, and function definitions. It also includes some additional features such as creating files, displaying message boxes, and hiding the console.
 
-Syntax
 
+## FAQ
+
+#### Question 1
+
+Answer 1
+
+#### Question 2
+
+Answer 2
+Syntax
 Zero Language has a syntax similar to C# with some additional constructs. Here are some examples of the syntax:
 
 Defining a function:
-
 ```bash
 Function MyFunction()
 {
@@ -61,10 +69,12 @@ EndFunction
 Factorial(5);
 ```
 
-Getting Started
+## Getting Started
 
 To get started with Zero Language, you can download the Zero Language interpreter from the official GitHub repository. You can also find the syntax and some examples in the repository's README.md file. Once you have downloaded the interpreter, you can write your own programs in Zero Language and run them using the interpreter.
 
-Contributing
+## Contributing
 
 If you want to contribute to the development of Zero Language, you can fork the repository, make your changes, and submit a pull request. You can also submit issues and bug reports on the repository's issue tracker. We welcome contributions from everyone, regardless of their skill level or programming experience.
+
+
