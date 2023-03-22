@@ -1,4 +1,4 @@
-Zero Language
+## Zero Language
 
 Zero Language is a simple programming language designed for beginners to learn programming concepts. The language is inspired by a subset of C# and provides basic constructs such as loops, conditional statements, and function definitions. It also includes some additional features such as creating files, displaying message boxes, and hiding the console.
 
@@ -36,7 +36,7 @@ ConsoleWait(key/line);
 ```
 
 
-##Examples
+## Examples
 
 Here is an example of a program written in Zero Script that prints the numbers 1 to 10:
 ```bash
