@@ -1,9 +1,8 @@
-Function Factorial()
-
-For int i = 1; i <= 10; i++
-  Log(i);
-EndFor
-
-EndFunction
-
-Factorial();
+Messagebox("Hello! This is a big programm!!!")
+    Log("Was ist dein name?")
+    string name = ConsoleWait(line)
+    Log("Wie alt bist du?")
+    string  alter = ConsoleWait(line)
+    Log("Woher kommst du?")
+    string  wohin = ConsoleWait(line)
+    Messagebox("Hallo, "+name+"! Du bist "+alter+" Jahre alt und"+ " kommst aus "+wohin)

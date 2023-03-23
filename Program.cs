@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.CSharp;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace _0Code
 {
@@ -29,10 +30,18 @@ namespace _0Code
             {
                 string line = lines[lineNumber].Trim();
                 string[] parts = line.Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                string command = parts.Length > 0 ? parts[0].Trim() : "";
+                string[] arguments = parts.Length > 1 ? parts.Skip(1).ToArray() : new string[0];
 
-                if (parts[0].Equals("Function", StringComparison.OrdinalIgnoreCase))
+                if (IsUnknownFunction(line))
                 {
-                    string functionName = parts[1];
+                    lineNumber++;
+                    continue;
+                }
+
+                if (command.Equals("Function", StringComparison.OrdinalIgnoreCase))
+                {
+                    string functionName = arguments[0];
                     List<Action> functionActions = new List<Action>();
                     lineNumber++;
                     while (lineNumber < lines.Length && !lines[lineNumber].Equals("EndFunction", StringComparison.OrdinalIgnoreCase))
@@ -46,33 +55,42 @@ namespace _0Code
                 {
                     actions.Add(new Action { Code = "} else {" });
                 }
-                else if (parts[0].Equals("CallFunction", StringComparison.OrdinalIgnoreCase))
+                else if (command.Equals("CallFunction", StringComparison.OrdinalIgnoreCase))
                 {
-                    actions.Add(new Action { Type = "CallFunction", Code = $"{parts[0]}({parts[1]});", FunctionName = parts[1] });
+                    actions.Add(new Action { Type = "CallFunction", Code = $"{arguments[0]}();", FunctionName = arguments[0] });
                 }
-                else if (parts[0].Equals("Messagebox", StringComparison.OrdinalIgnoreCase))
+                else if (command.Equals("Messagebox", StringComparison.OrdinalIgnoreCase))
                 {
-                    actions.Add(new Action { Code = $"System.Windows.Forms.MessageBox.Show({parts[1]});" });
+                    actions.Add(new Action { Code = $"System.Windows.Forms.MessageBox.Show({arguments[0]});" });
                 }
-                else if (parts[0].Equals("Wait", StringComparison.OrdinalIgnoreCase))
+                else if (command.Equals("Wait", StringComparison.OrdinalIgnoreCase))
                 {
-                    actions.Add(new Action { Code = $"System.Threading.Thread.Sleep({parts[1]});" });
+                    actions.Add(new Action { Code = $"System.Threading.Thread.Sleep({arguments[0]});" });
                 }
-                else if (parts[0].Equals("Log", StringComparison.OrdinalIgnoreCase))
+                else if (command.Equals("Log", StringComparison.OrdinalIgnoreCase))
                 {
-                    actions.Add(new Action { Code = $"Console.WriteLine({parts[1]});" });
+                    actions.Add(new Action { Code = $"Console.WriteLine({arguments[0]});" });
                 }
-                else if (parts[0].Equals("ConsoleWait", StringComparison.OrdinalIgnoreCase))
+                else if (command.Equals("ConsoleWait", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (parts[1].Equals("key", StringComparison.OrdinalIgnoreCase))
+                    string assignmentCode = "";
+                    if (line.Contains("="))
                     {
-                        actions.Add(new Action { Code = "Console.ReadKey();" });
+                        string[] assignmentParts = line.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
+                        assignmentCode = assignmentParts[0].Trim() + " = ";
                     }
-                    else if (parts[1].Equals("line", StringComparison.OrdinalIgnoreCase))
+
+                    string waitType = arguments.Length > 0 ? arguments[0].Trim() : "line";
+                    if (waitType.Equals("key", StringComparison.OrdinalIgnoreCase))
                     {
-                        actions.Add(new Action { Code = "Console.ReadLine();" });
+                        actions.Add(new Action { Code = $"{assignmentCode}Console.ReadKey();" });
+                    }
+                    else if (waitType.Equals("line", StringComparison.OrdinalIgnoreCase))
+                    {
+                        actions.Add(new Action { Code = $"{assignmentCode}Console.ReadLine();" });
                     }
                 }
+
                 else if (line.StartsWith("If", StringComparison.OrdinalIgnoreCase) || line.StartsWith("if", StringComparison.OrdinalIgnoreCase))
                 {
                     var condition = line.Substring(2).Trim();
@@ -84,7 +102,10 @@ namespace _0Code
                 }
                 else if (line.StartsWith("int", StringComparison.OrdinalIgnoreCase) || line.StartsWith("string", StringComparison.OrdinalIgnoreCase))
                 {
-                    actions.Add(new Action { Code = $"{line};" });
+                    string pattern = @"ConsoleWait\s*\(\s*line\s*\)";
+                    string replacement = "Console.ReadLine()";
+                    string modifiedLine = Regex.Replace(line, pattern, replacement);
+                    actions.Add(new Action { Code = $"{modifiedLine};" });
                 }
                 else if (line.StartsWith("HideConsole()", StringComparison.OrdinalIgnoreCase))
                 {
@@ -92,45 +113,109 @@ namespace _0Code
                 }
                 else if (line.StartsWith("For", StringComparison.OrdinalIgnoreCase) || line.StartsWith("for", StringComparison.OrdinalIgnoreCase))
                 {
-                    string[] forParts = line.Split(new[] { ';', '(' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] forParts = line.Split(new[] { ';', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
                     string initialization = forParts[1].Trim();
                     string condition = forParts[2].Trim();
                     string iterator = forParts[3].Trim();
 
-                    actions.Add(new Action { Code = $"for ({initialization}; {condition}; {iterator}) {{" });
-
-                    AddClosingBraceIfNeeded(actions);
+                    actions.Add(new Action { Code = $"for ({initialization}; {condition}; {iterator})" });
+                    actions.Add(new Action { Code = "{" });
                 }
                 else if (line.StartsWith("EndFor", StringComparison.OrdinalIgnoreCase) || line.Equals("endfor", StringComparison.OrdinalIgnoreCase))
                 {
                     actions.Add(new Action { Code = "}" });
                 }
-                else if (parts[0].Equals("File.Create", StringComparison.OrdinalIgnoreCase))
+                else if (command.Equals("File", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (arguments.Length >= 2)
                     {
-                    string fileName = parts[1];
-                    string filePath = parts[2];
-                    string fileContent = parts[3];
-                    CreateFile(Path.Combine(Path.GetDirectoryName(filePath), fileName), fileContent);
+                        string fileNameWithPath = arguments[0].Trim();
+                        string fileContent = arguments[1].Trim();
+                        CreateFile(fileNameWithPath, fileContent);
+                    }
                 }
-                
+                else if (command.Equals("HTTPClient", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (arguments.Length >= 1)
+                    {
+                        string url = arguments[0].Trim();
+                        string clientName = arguments.Length > 1 ? arguments[1].Trim() : "client";
+                        actions.Add(new Action
+                        {
+                            Code = $"var {clientName} = new System.Net.Http.HttpClient();",
+                        });
+                        actions.Add(new Action
+                        {
+                            Code = $"{clientName}.BaseAddress = new Uri(\"{url}\");",
+                        });
+                    }
+                }
+
 
                 lineNumber++;
             }
 
             return actions;
         }
-        private static void CreateFile(string filePath, string fileContent)
+
+        public static bool IsUnknownFunction(string line)
+        {
+            string pattern = @"^([a-zA-Z_]\w*)\s*\(";
+            Match match = Regex.Match(line, pattern);
+            if (match.Success)
+            {
+                string functionName = match.Groups[1].Value;
+                List<string> knownFunctions = new List<string>
+        {
+            "Function",
+            "CallFunction",
+            "Messagebox",
+            "Wait",
+            "Log",
+            "ConsoleWait",
+            "If",
+            "Else",
+            "EndIf",
+            "int",
+            "string",
+            "HideConsole",
+            "For",
+            "EndFor",
+            "File",
+            "HTTPClient"
+        };
+
+                if (!knownFunctions.Contains(functionName, StringComparer.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"Error: Unknown function '{functionName}'!");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static void CreateFile(string fileNameWithPath, string fileContent)
         {
             try
             {
-                File.WriteAllText(filePath, fileContent);
-                Console.WriteLine($"File created: {filePath}");
+                // Ensure that the directory exists
+                string directoryPath = Path.GetDirectoryName(fileNameWithPath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                // Create and write the content to the file
+                File.WriteAllText(fileNameWithPath, fileContent);
+                Console.WriteLine($"File created successfully: {fileNameWithPath}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error creating file: {ex.Message}");
             }
         }
+
 
         private static void AddClosingBraceIfNeeded(List<Action> actions)
         {
@@ -182,19 +267,46 @@ namespace _0Code
             string code = $@"using System;
 using System.Runtime.InteropServices;
 
-            namespace MyNamespace
+            namespace ZeroCode
             {{
-                public class MyClass
+                public class ZeroCode
                 {{
                     public static void Main()
                     {{
+                        int MadeWithZeroCode = 0;
                         {consoleLine}
                     }}
                 }}
             }}";
             File.WriteAllText("log.cs", code.ToString());
+            CodeDomProvider provider = new CSharpCodeProvider();
+            CompilerParameters parameters = new CompilerParameters();
+            parameters.GenerateExecutable = true;
+            parameters.OutputAssembly = "Project.exe";
+            parameters.ReferencedAssemblies.Add("System.dll");
+            parameters.ReferencedAssemblies.Add("System.Windows.Forms.dll");
+            parameters.ReferencedAssemblies.Add("mscorlib.dll");
+            parameters.ReferencedAssemblies.Add("System.Runtime.InteropServices.dll");
 
-            
+            CompilerResults results = provider.CompileAssemblyFromSource(parameters, code);
+
+
+            if (results.Errors.HasErrors)
+            {
+                Console.WriteLine("Compilation failed:");
+                foreach (CompilerError error in results.Errors)
+                {
+                    Console.WriteLine(error.ErrorText);
+
+
+                }
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Compilation successful!");
+            }
+
 
 
 
