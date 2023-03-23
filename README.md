@@ -7,10 +7,10 @@ Zero Script is a simple programming language designed for beginners to learn pro
 
 #### 1. What is the purpose of this programming language?
 
-Answer The purpose of this language is to provide a simple and easy-to-learn syntax for beginners who are new to programming.
+The purpose of this language is to provide a simple and easy-to-learn syntax for beginners who are new to programming.
 
 #### 2. What platforms does this language support?
-Answer This language is designed to run on the Microsoft .NET framework and can be used on Windows, macOS, and Linux.
+This language is designed to run on the Microsoft .NET framework and can be used on Windows, macOS, and Linux.
 
 #### 3. What are some key features of this language?
 Some key features of this language include support for functions, if-else statements, loops, file I/O operations, and console input/output.
